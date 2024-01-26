@@ -1,5 +1,11 @@
-import Phone from "./src/components/Phone";
+import PhoneInput from "./src/inputs/Phone";
 
-export default {
-  PhoneInput: Phone
+const Inputs = {
+  Phone: PhoneInput,
 };
+
+export {
+  PhoneInput,
+}
+
+export default Inputs;
