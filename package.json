@@ -1,0 +1,33 @@
+{
+  "name": "react-native-inputs",
+  "version": "0.0.1",
+  "description": "A biblioteca \"react-native-inputs\" é uma coleção especializada de componentes de entrada (inputs) para React Native, projetada especificamente para atender às necessidades dos white labels da Codificar. O principal objetivo desta biblioteca é padronizar e simplificar a implementação de diversos tipos de campos de entrada em aplicativos móveis, assegurando uma experiência de usuário consistente e eficiente em diferentes produtos da empresa.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://git.codificar.com.br/react-components/react-native-inputs"
+  },
+  "keywords": [
+    "react-native",
+    "inputs"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "styled-components": "5.3.6"
+  },
+  "peerDependencies": {
+    "react-native": ">=0.68.1"
+  },
+  "author": "Codificar - Felipe Zanetti",
+  "bugs": {
+    "url": "https://git.codificar.com.br/react-components/react-native-inputs/issues"
+  },
+  "homepage": "https://git.codificar.com.br/react-components/react-native-inputs#readme",
+  "devDependencies": {
+    "@types/styled-components-react-native": "^5.2.1",
+    "react-native": "0.68.1"
+  }
+}
