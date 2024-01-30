@@ -26,7 +26,7 @@ export const defaultProps: IThemes = {
       error: {
         color: '#DC3545',
         disabledColor: defaultColors.disabled,
-        size: 14,
+        size: 12,
       },
     }
   }
