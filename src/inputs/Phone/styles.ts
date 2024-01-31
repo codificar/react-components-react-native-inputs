@@ -1,24 +1,19 @@
-import { IFont } from '../../Types';
+// Modules
 import styled, { css } from 'styled-components/native';
+import ModalSelector from 'react-native-modal-selector-searchable';
+
+// Types
+import { IFont } from '../../Types';
 
 export const Container = styled.View`
   background-color: #bbb;
   width: 100%;
   display: flex;
-  /* flex: 1; */
-  padding: 16px;
-  /* justify-content: center; */
-  /* align-items: center; */
+  padding: 8px 0;
 `;
 
 export const TextLabel = styled.Text<{theme: IFont}>`
-  /* flex: 1; */
-  /* display: flex; */
-  /* background-color: #fff;
-  margin: 4px 0;
-  height: 40px;
-  width: 100%; */
-  /* min-height: 50px; */
+  color: #000;
 
   ${props => (props.theme.color) &&
 		css`
@@ -29,16 +24,20 @@ export const TextLabel = styled.Text<{theme: IFont}>`
 		css`
 			font-size: ${props.theme.size};
 		`}
+    
+  ${props => (props.theme.family) &&
+		css`
+			font-family: ${props.theme.family};
+		`}
+
+  ${props => (props.theme.weight) &&
+		css`
+			font-weight: ${props.theme.weight};
+		`}
 
 `;
 export const TextError = styled.Text<{theme: IFont}>`
-  /* flex: 1; */
-  /* display: flex; */
-  /* background-color: #fff;
-  margin: 4px 0;
-  height: 40px;
-  width: 100%; */
-  /* min-height: 50px; */
+  color: #c80000;
   margin: 0 8px;
  
   ${props => (props.theme.color) &&
@@ -50,15 +49,56 @@ export const TextError = styled.Text<{theme: IFont}>`
 		css`
 			font-size: ${props.theme.size};
 		`}
+    
+  ${props => (props.theme.family) &&
+		css`
+			font-family: ${props.theme.family};
+		`}
+
+  ${props => (props.theme.weight) &&
+		css`
+			font-weight: ${props.theme.weight};
+		`}
 
 `;
 
-export const TextInput = styled.TextInput`
-  /* flex: 1; */
-  /* display: flex; */
-  background-color: #fff;
-  margin: 4px 0;
+export const ContainerInput = styled.View`
+  flex: 1;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ccc;
+  margin-left: 8px ;
+  padding: 0 8px ;
+  border-radius: 4px;
   height: 40px;
-  width: 100%;
-  /* min-height: 50px; */
 `;
+
+export const PreTextInput = styled.TextInput`
+  color: black;
+`;
+export const TextInput = styled.TextInput`
+  flex: 1;
+`;
+
+export const Selected = styled(ModalSelector)`
+  padding: 0 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+`
+
+export const Row = styled.View`
+  flex-direction: row;
+`
+
+export const TextFlag = styled.Text`
+  font-size: 24px;
+  margin-right: 8px;
+`
+
+export const TextFlagName = styled.Text`
+  font-size: 16px;
+  margin-right: 8px;
+`

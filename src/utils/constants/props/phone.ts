@@ -1,4 +1,5 @@
-import { IColor, IThemes } from "../../../Types";
+// Types
+import { IColor, IProps } from "../../../Types";
 
 const defaultColors: IColor = {
   background: '#FFF',
@@ -7,7 +8,8 @@ const defaultColors: IColor = {
   disabled: '#C6CBD4',
 }
 
-export const defaultProps: IThemes = {
+export const defaultProps: IProps = {
+  label: 'TELEFONE',
   theme: {
     colors: defaultColors,
     width: '100%',
@@ -29,5 +31,5 @@ export const defaultProps: IThemes = {
         size: 12,
       },
     }
-  }
-} as IThemes
+  },
+} as IProps

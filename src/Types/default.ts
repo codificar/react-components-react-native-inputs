@@ -1,3 +1,6 @@
+// Types
+import { alCountryCodes } from "./Phone";
+
 type IHexColor = `#${string}` | string;
 
 export type IColor = {
@@ -16,14 +19,16 @@ export type IFont = {
 }
 
 export interface IThemes {
-  theme?: {
-    colors?: IColor,
-    font?: {
-      label?: IFont,
-      placeholder?: IFont,
-      error?: IFont,
-    },
-    width?: string | number,
-    height?: string | number,
+  colors?: IColor,
+  font?: {
+    label?: IFont,
+    placeholder?: IFont,
+    error?: IFont,
   }
+}
+
+export interface IProps {
+  label?: string;
+  theme?: IThemes;
+  countries?: alCountryCodes[]
 }
