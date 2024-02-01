@@ -6,18 +6,23 @@ import ModalSelector from 'react-native-modal-selector-searchable';
 import { IFont } from '../../Types';
 
 export const Container = styled.View`
-  background-color: #bbb;
   width: 100%;
   display: flex;
   padding: 8px 0;
 `;
 
-export const TextLabel = styled.Text<{theme: IFont}>`
+export const TextLabel = styled.Text<{focus?: string, theme: IFont}>`
   color: #000;
+  margin: 4px ;
 
   ${props => (props.theme.color) &&
 		css`
 			color: ${props.theme.color};
+		`}
+
+  ${props => (props.focus) &&
+		css`
+			color: ${props.focus};
 		`}
 
   ${props => (props.theme.size) &&
@@ -38,8 +43,9 @@ export const TextLabel = styled.Text<{theme: IFont}>`
 `;
 export const TextError = styled.Text<{theme: IFont}>`
   color: #c80000;
-  margin: 0 8px;
+  margin: 2px 8px;
  
+
   ${props => (props.theme.color) &&
 		css`
 			color: ${props.theme.color};
@@ -62,7 +68,7 @@ export const TextError = styled.Text<{theme: IFont}>`
 
 `;
 
-export const ContainerInput = styled.View`
+export const ContainerInput = styled.View<{disable?: string, focus?: string}>`
   flex: 1;
   flex-direction: row;
   align-items: center;
@@ -71,26 +77,89 @@ export const ContainerInput = styled.View`
   padding: 0 8px ;
   border-radius: 4px;
   height: 40px;
+
+  ${props => (props.focus) &&
+		css`
+			border-color: ${props.focus};
+		`}
+
+  ${props => (props.disable) &&
+		css`
+			background-color: ${props.disable};
+		`}
 `;
 
-export const PreTextInput = styled.TextInput`
+export const PreTextInput = styled.TextInput<{theme: IFont}>`
   color: black;
-`;
-export const TextInput = styled.TextInput`
-  flex: 1;
+
+  ${props => (props.theme.color) &&
+		css`
+			color: ${props.theme.color};
+		`}
+
+  ${props => (props.theme.size) &&
+		css`
+			font-size: ${props.theme.size};
+		`}
+    
+  ${props => (props.theme.family) &&
+		css`
+			font-family: ${props.theme.family};
+		`}
+
+  ${props => (props.theme.weight) &&
+		css`
+			font-weight: ${props.theme.weight};
+		`}
 `;
 
-export const Selected = styled(ModalSelector)`
+export const TextInput = styled.TextInput<{theme: IFont}>`
+  flex: 1;
+
+  ${props => (props.theme.color) &&
+		css`
+			color: ${props.theme.color};
+		`}
+
+  ${props => (props.theme.size) &&
+		css`
+			font-size: ${props.theme.size};
+		`}
+    
+  ${props => (props.theme.family) &&
+		css`
+			font-family: ${props.theme.family};
+		`}
+
+  ${props => (props.theme.weight) &&
+		css`
+			font-weight: ${props.theme.weight};
+		`}
+
+`;
+
+export const Selected = styled(ModalSelector)<{disable?: string, focus?: string}>`
   padding: 0 8px;
   border: 1px solid #ccc;
   border-radius: 4px;
   height: 40px;
   align-items: center;
   justify-content: center;
+
+  ${props => (props.focus) &&
+		css`
+			border-color: ${props.focus};
+		`}
+
+  ${props => (props.disable) &&
+		css`
+			background-color: ${props.disable};
+		`}
 `
 
 export const Row = styled.View`
   flex-direction: row;
+  align-items: center;
 `
 
 export const TextFlag = styled.Text`

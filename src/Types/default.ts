@@ -1,8 +1,9 @@
 // Modules
+import React from "react";
 import { TextInputProps } from "react-native";
 
 // Types
-import { alCountryCodes } from "./Phone";
+import { allCountryCodes } from "./Phone";
 
 type IHexColor = `#${string}` | string;
 
@@ -30,9 +31,46 @@ export interface IThemes {
   }
 }
 
-export interface IPropsPhone extends TextInputProps {
+export interface IProps extends TextInputProps {
+  /**
+   * @description Function to get phone number
+   * @type {React.Dispatch<string>}
+  */
+  getValue: React.Dispatch<string>;
+  
+  /**
+   * @description Default value phone number
+   * @type {IThemes}
+  */
+  defaultValue: string;
+
+  /**
+   * @description Language for the phone component
+   * @type {string}
+  */
   language: string;
+  
+  /**
+   * @description Optional label to display above the input field
+   * @type {string}
+  */
   label?: string;
+
+  /**
+   * @description Optional disable the input field
+   * @type {boolean}
+  */
+  disabled?: string;
+  
+  /**
+   * @description Error message to be displayed in case of failed validation
+   * @type {string}
+  */
+  error?: string;
+  
+  /**
+   * @description Theme for the phone component
+   * @type {IThemes}
+  */
   theme?: IThemes;
-  countries?: alCountryCodes[]
 }

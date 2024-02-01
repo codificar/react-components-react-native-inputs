@@ -1,4 +1,7 @@
 {
+  "error": {
+    "maskNotFound": "Mascara não encontrada"
+  },
   "country": {
     "AD": "Andorra",
     "AE": "Emiratos Árabes Unidos",

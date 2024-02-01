@@ -8,27 +8,28 @@ const defaultColors: IColor = {
   disabled: '#C6CBD4',
 }
 
-export const defaultProps: IPropsPhone = {
+export const defaultProps: Omit<IPropsPhone, 'getValue' | 'defaultValue'> = {
   language: 'pt-br',
   label: 'TELEFONE',
-  placeholder: 'Insira',
+  placeholder: 'Insira seu telefone',
+  defaultSelected: "BR",
   theme: {
     colors: defaultColors,
     font: {
       label: {
         color: defaultColors.primary,
         disabledColor: defaultColors.disabled,
-        size: 16,
+        size: 18,
       },
       placeholder: {
         color: '#BBB',
         disabledColor: defaultColors.disabled,
-        size: 14,
+        size: 16,
       },
       error: {
         color: '#DC3545',
         disabledColor: defaultColors.disabled,
-        size: 12,
+        size: 14,
       },
     }
   },

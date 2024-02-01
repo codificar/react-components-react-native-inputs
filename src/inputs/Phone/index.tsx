@@ -29,17 +29,25 @@ import {
 } from './styles';
 
 const Phone: React.FC<IPropsPhone> = ({
+  getValue,
+  getValueCountry = undefined,
+  defaultValue = '',
+  disabled = false,
   language = defaultProps.language,
   label = defaultProps.label,
   theme = defaultProps.theme,
+  defaultSelected = defaultProps.defaultSelected,
   countries = [],
+  error = '',
   ...rest
 }) => {
-  const [state, setstate] = useState<allPhoneInfoInTheWorld>({flag:' '} as allPhoneInfoInTheWorld)
-  const [valuePhone, setValuePhone] = useState<string>('')
+  const [focus, setFocus] = useState<undefined | string>()
   const [maxLength, setMaxLength] = useState(1)
-  const [error, setError] = useState('')
+  const [errorMessage, setError] = useState(error)
   const [translate] = useState(getTranslate(language))
+  const [valuePhone, setValuePhone] = useState<string>('')
+  const [country, setCountry] = useState<allPhoneInfoInTheWorld>({} as allPhoneInfoInTheWorld)
+
 
   const renderDataSelected = useCallback(() => {
     let countriesFiltered = dataPhones
@@ -51,25 +59,36 @@ const Phone: React.FC<IPropsPhone> = ({
       return {
         ...value,
         key: index,
-        label: value.callingCode + " " + value.name,
-        component: <TextFlagName>{`${value.flag} ${value.callingCode} ` + translate(`country.${value.countryCode}`)}</TextFlagName>
+        label: value.callingCode + " " + translate.country[value.countryCode],
+        component: <TextFlagName>{`${value.flag} ${value.callingCode} ` + translate.country[value.countryCode]}</TextFlagName>
       }
     })
   }, []);
 
   const changeContry = useCallback((value: allPhoneInfoInTheWorld ) => {
-    const maiorString = value.phoneMasks.reduce((maior, atual) => {
-      return atual.length > maior.length ? atual : maior;
+    const largestMask = value.phoneMasks.reduce((larger, current) => {
+      return current.length > larger.length ? current : larger;
     }, "");
 
-    setMaxLength(maiorString.length)
+    setMaxLength(largestMask.length)
     setValuePhone('')
-    setstate(value)
+    setCountry(value)
+    getValueCountry && getValueCountry(translate.value.countryCode)
+    getValue('')
   }, []);
 
   const onChangeText = useCallback((INPUT: string, MASKS: string[]) => {
+    setError('')
     const input = INPUT.replace(/\D/g, '');
-    
+
+    if (!MASKS.length) return setError(error.maskNotFound)
+
+    const largestMask = MASKS.reduce((larger, current) => {
+      return current.length > larger.length ? current : larger;
+    }, "");
+
+    if (input.length > largestMask.length) return setError('Telefone invalido')
+
     const preparedMask = MASKS.map(value => ({
       mask: value.replace(/\d/g, '#'),
       numSubstitutions: value.replace(/[^#]/g, '').length + value.replace(/\D/g, '').length,
@@ -87,44 +106,55 @@ const Phone: React.FC<IPropsPhone> = ({
       }
 
       setValuePhone(output);
+      getValue(output)
     } else {
       setError('Nenhuma mascara selecionada')
     }
   }, []);
 
+  useEffect(() => {
+    const currentPhone = dataPhones.find(country => defaultSelected === country.countryCode)
+
+    if (currentPhone) {
+      changeContry(currentPhone)
+      onChangeText(defaultValue.replace(currentPhone.callingCode, ""), currentPhone.phoneMasks)
+    }
+  }, [changeContry, onChangeText])
 
   return (
     <Container>
-      <TextLabel theme={theme?.font?.label} disabled>{label}</TextLabel>
+      <TextLabel focus={focus} theme={theme?.font?.label}>{label}</TextLabel>
       <Row>
         
       <Selected
+      focus={focus}
+      disabled={!!disabled}
+      disable={disabled ? theme?.colors?.disabled : ''}
       renderItem={() => <></>}
       onChange={(value) => changeContry(value as allPhoneInfoInTheWorld)}
       data={renderDataSelected()}
-      >
-      <View style={{
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between'
-      }}>
-        
-        <TextFlag>{state.flag}</TextFlag>
-        <Icon type="font-awesome" name="caret-down" size={25} color="#999" />
-      </View>
+      >        
+        <Row>
+          <TextFlag>{country.flag}</TextFlag>
+          <Icon type="font-awesome" name="caret-down" size={25} color="#999" />
+        </Row>
       </Selected>
 
-      <ContainerInput>
-        {state.callingCode && <PreTextInput editable={false}>{state.callingCode}</PreTextInput>}
+      <ContainerInput disable={disabled ? theme?.colors?.disabled : ''} focus={focus}>
+        {country.callingCode && <PreTextInput editable={false} theme={theme?.font?.placeholder}>{country.callingCode}</PreTextInput>}
         <TextInput 
           {...rest}
+          editable={!disabled}
           value={valuePhone}
           maxLength={maxLength}
-          onChangeText={text => onChangeText(text, state.phoneMasks || [])}
+          onBlur={() => setFocus('')}
+          theme={theme?.font?.placeholder}
+          onFocus={() => setFocus(theme?.colors?.primary)}
+          onChangeText={text => onChangeText(text, country.phoneMasks || [])}
         ></TextInput>
       </ContainerInput>
       </Row>
-      <TextError theme={theme?.font?.error} >{error}</TextError>
+      <TextError theme={theme?.font?.error} >{errorMessage}</TextError>
     </Container>
   );
 };
