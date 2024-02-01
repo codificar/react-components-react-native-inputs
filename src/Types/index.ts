@@ -1,8 +1,8 @@
 // Types
-import { IProps, IColor, IFont, IThemes} from './default'
+import { IPropsPhone, IColor, IFont, IThemes} from './default'
 
 export {
-  IProps,
+  IPropsPhone,
   IColor,
   IFont,
   IThemes

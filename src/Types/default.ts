@@ -1,3 +1,6 @@
+// Modules
+import { TextInputProps } from "react-native";
+
 // Types
 import { alCountryCodes } from "./Phone";
 
@@ -27,7 +30,8 @@ export interface IThemes {
   }
 }
 
-export interface IProps {
+export interface IPropsPhone extends TextInputProps {
+  language: string;
   label?: string;
   theme?: IThemes;
   countries?: alCountryCodes[]

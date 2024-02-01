@@ -1,5 +1,5 @@
 // Types
-import { IColor, IProps } from "../../../Types";
+import { IColor, IPropsPhone } from "../../../Types";
 
 const defaultColors: IColor = {
   background: '#FFF',
@@ -8,12 +8,12 @@ const defaultColors: IColor = {
   disabled: '#C6CBD4',
 }
 
-export const defaultProps: IProps = {
+export const defaultProps: IPropsPhone = {
+  language: 'pt-br',
   label: 'TELEFONE',
+  placeholder: 'Insira',
   theme: {
     colors: defaultColors,
-    width: '100%',
-    height: 60,
     font: {
       label: {
         color: defaultColors.primary,
@@ -32,4 +32,4 @@ export const defaultProps: IProps = {
       },
     }
   },
-} as IProps
+}

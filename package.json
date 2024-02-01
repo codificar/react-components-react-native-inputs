@@ -22,7 +22,6 @@
   "peerDependencies": {
     "react-native": ">=0.68.1",
     "react-native-elements": ">=3.0.0-alpha.1",
-    "react-native-i18n": ">=2.0.10",
     "moment": ">=2.29.4"
   },
   "author": "Codificar - Felipe Zanetti",

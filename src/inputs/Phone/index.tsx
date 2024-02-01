@@ -8,10 +8,10 @@ import { dataPhones } from '../../utils/constants/data/phone';
 import { defaultProps } from '../../utils/constants/props/phone';
 
 // Locales
-import { translate } from '../../locales';
+import { getTranslate } from '../../locales';
 
 // Types
-import { IProps } from '../../Types';
+import { IPropsPhone } from '../../Types';
 import { allPhoneInfoInTheWorld } from '../../Types/Phone';
 
 // Styles
@@ -28,7 +28,8 @@ import {
   TextFlagName
 } from './styles';
 
-const Phone: React.FC<IProps & TextInputProps> = ({
+const Phone: React.FC<IPropsPhone> = ({
+  language = defaultProps.language,
   label = defaultProps.label,
   theme = defaultProps.theme,
   countries = [],
@@ -38,6 +39,7 @@ const Phone: React.FC<IProps & TextInputProps> = ({
   const [valuePhone, setValuePhone] = useState<string>('')
   const [maxLength, setMaxLength] = useState(1)
   const [error, setError] = useState('')
+  const [translate] = useState(getTranslate(language))
 
   const renderDataSelected = useCallback(() => {
     let countriesFiltered = dataPhones
