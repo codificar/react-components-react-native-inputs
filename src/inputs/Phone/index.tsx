@@ -7,6 +7,9 @@ import { Icon } from "react-native-elements";
 import { dataPhones } from '../../utils/constants/data/phone';
 import { defaultProps } from '../../utils/constants/props/phone';
 
+// Locales
+import { translate } from '../../locales';
+
 // Types
 import { IProps } from '../../Types';
 import { allPhoneInfoInTheWorld } from '../../Types/Phone';
@@ -47,7 +50,7 @@ const Phone: React.FC<IProps & TextInputProps> = ({
         ...value,
         key: index,
         label: value.callingCode + " " + value.name,
-        component: <TextFlagName>{`${value.flag} ${value.callingCode} ${value.name}`}</TextFlagName>
+        component: <TextFlagName>{`${value.flag} ${value.callingCode} ` + translate(`country.${value.countryCode}`)}</TextFlagName>
       }
     })
   }, []);

@@ -98,7 +98,7 @@ export const dataPhones:allPhoneInfoInTheWorld[] = [
     "flag": "🇦🇺",
     "countryCode": "AU",
     "name": "Austrália",
-    "phoneMasks": [ "2 #### ####", "3 #### ####", "7 #### ####", "  4## ### ### "]
+    "phoneMasks": [ "2 #### ####", "3 #### ####", "7 #### ####", "4## ### ###"]
   },
   {
     "callingCode": "+297",
@@ -217,7 +217,7 @@ export const dataPhones:allPhoneInfoInTheWorld[] = [
     "flag": "🇧🇷",
     "countryCode": "BR",
     "name": "Brasil",
-    "phoneMasks": ["(##) ####-####", "(##) #####-####"]
+    "phoneMasks": ["(##) #####-####", "(##) ####-####"]
   },
   {
     "callingCode": "+1",
