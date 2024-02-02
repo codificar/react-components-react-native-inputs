@@ -34,7 +34,7 @@ export const TextLabel = styled.Text<IStyleTextLabel>`
 
   ${props => (props.theme.size) &&
     css`
-      font-size: ${props.theme.size};
+      font-size: ${props.theme.size}px;
     `}
 `;
 
@@ -49,7 +49,7 @@ export const TextError = styled.Text<IStyleTextError>`
 
   ${props => (props.theme.size) &&
     css`
-      font-size: ${props.theme.size};
+      font-size: ${props.theme.size}px;
     `}
 `;
 
@@ -104,7 +104,7 @@ export const PreTextInput = styled.TextInput<IStylePreTextInput>`
 
   ${props => (props.theme.size) &&
     css`
-      font-size: ${props.theme.size};
+      font-size: ${props.theme.size}px;
     `}
 `;
 
@@ -118,7 +118,7 @@ export const TextInput = styled.TextInput<IStyleTextInput>`
 
   ${props => (props.theme.size) &&
     css`
-      font-size: ${props.theme.size};
+      font-size: ${props.theme.size}px;
     `}
 `;
 
