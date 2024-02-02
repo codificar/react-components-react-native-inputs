@@ -16,17 +16,14 @@ export const defaultProps: Omit<IPropsPhone, 'getValue' | 'defaultValue' | 'labe
     font: {
       label: {
         color: defaultColors.primary,
-        disabledColor: defaultColors.disabled,
-        size: 18,
+        size: 16,
       },
-      placeholder: {
-        color: '#BBB',
-        disabledColor: defaultColors.disabled,
+      input: {
+        color: '#000',
         size: 16,
       },
       error: {
         color: '#DC3545',
-        disabledColor: defaultColors.disabled,
         size: 14,
       },
     }

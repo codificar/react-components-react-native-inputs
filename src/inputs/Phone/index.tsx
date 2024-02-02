@@ -6,6 +6,7 @@ import { Icon } from "react-native-elements";
 // Utils
 import { dataPhones } from '../../utils/constants/data/phone';
 import { defaultProps } from '../../utils/constants/props/phone';
+import { getStyles } from '../../utils';
 
 // Locales
 import { getTranslate } from '../../locales';
@@ -47,11 +48,11 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
 
   const [focus, setFocus] = useState<undefined | string>()
   const [maxLength, setMaxLength] = useState(1)
-  const [errorMessage, setError] = useState('')
+  const [errorMessage, setError] = useState<string>('')
   const [translate] = useState(getTranslate(language))
+  const [themes] = useState(getStyles(theme))
   const [valuePhone, setValuePhone] = useState<string>('')
   const [country, setCountry] = useState<allPhoneInfoInTheWorld>({} as allPhoneInfoInTheWorld)
-
 
   const renderDataSelected = useCallback(() => {
     let countriesFiltered = dataPhones
@@ -69,7 +70,7 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
     })
   }, []);
 
-  const changeContry = useCallback((value: allPhoneInfoInTheWorld ) => {
+  const changeCountry = useCallback((value: allPhoneInfoInTheWorld ) => {
     const largestMask = value.phoneMasks.reduce((larger, current) => {
       return current.length > larger.length ? current : larger;
     }, "");
@@ -122,10 +123,10 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
     const currentPhone = dataPhones.find(country => defaultSelected === country.countryCode)
 
     if (currentPhone) {
-      changeContry(currentPhone)
+      changeCountry(currentPhone)
       onChangeText(defaultValue.replace(currentPhone.callingCode, ""), currentPhone.phoneMasks)
     }
-  }, [changeContry, onChangeText])
+  }, [changeCountry, onChangeText])
 
   useImperativeHandle(ref, () => ({
     setValuePhone: ({valuePhone, valueCountry = 'BR'}) => {
@@ -137,7 +138,7 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
 
       const currentPhone = dataPhones.find(country => valueCountry === country.countryCode)
       if (currentPhone) {
-        changeContry(currentPhone)
+        changeCountry(currentPhone)
         onChangeText(valuePhone.replace(currentPhone.callingCode, ""), currentPhone.phoneMasks)
       }
     },
@@ -145,7 +146,7 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
       if (!valueCountry) return setError(translate.phone.error.countryNotFound)
       const currentPhone = dataPhones.find(country => valueCountry === country.countryCode)
       if (currentPhone) {
-        changeContry(currentPhone)
+        changeCountry(currentPhone)
         onChangeText(valuePhone.replace(currentPhone.callingCode, ""), currentPhone.phoneMasks)
       }
     },
@@ -161,16 +162,20 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
 
   return (
     <Container>
-      <TextLabel focus={focus} theme={theme?.font?.label}>{label || translate.phone.label}</TextLabel>
+      <TextLabel
+        focus={focus}
+        theme={!!errorMessage.length ? {...themes.font?.label, color: themes.font?.error.color} : themes.font?.label}
+      >{label || translate.phone.label}</TextLabel>
       <Row>
         <Selected
           focus={focus}
           disabled={!!disabled}
+          error={!!errorMessage.length ? themes?.font?.error?.color : ""}
           renderItem={() => <></>}
           outline={!!theme?.outline}
           data={renderDataSelected()}
-          disable={disabled ? theme?.colors?.disabled : ''}
-          onChange={(value) => changeContry(value as allPhoneInfoInTheWorld)}
+          disable={disabled ? themes?.colors?.disabled : ''}
+          onChange={(value) => changeCountry(value as allPhoneInfoInTheWorld)}
         >
           <Row>
             <TextFlag>{country.flag}</TextFlag>
@@ -180,10 +185,11 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
 
         <ContainerInput
           focus={focus}
+          error={!!errorMessage.length ? themes?.font?.error?.color : ""}
           outline={!!theme?.outline}
-          disable={disabled ? theme?.colors?.disabled : ''}
+          disable={disabled ? themes?.colors?.disabled : ''}
         >
-          {country.callingCode && <PreTextInput editable={false} theme={theme?.font?.placeholder}>{country.callingCode}</PreTextInput>}
+          {country.callingCode && <PreTextInput editable={false} theme={!disabled ? themes?.font?.input : themes?.font?.error}>{country.callingCode}</PreTextInput>}
           <TextInput
             {...rest}
             ref={refInput}
@@ -191,14 +197,14 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
             editable={!disabled}
             maxLength={maxLength}
             onBlur={() => setFocus('')}
-            theme={theme?.font?.placeholder}
-            onFocus={() => setFocus(theme?.colors?.primary)}
+            theme={themes?.font?.input}
+            onFocus={() => setFocus(themes.colors.primary)}
             placeholder={placeholder || translate.phone.placeholder}
             onChangeText={text => onChangeText(text, country.phoneMasks || [])}
           />
         </ContainerInput>
       </Row>
-      <TextError theme={theme?.font?.error} >{errorMessage}</TextError>
+      <TextError theme={themes?.font?.error} >{errorMessage}</TextError>
     </Container>
   );
 };

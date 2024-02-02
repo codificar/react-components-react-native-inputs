@@ -298,7 +298,8 @@ export interface IStyleTextError {
 }
 
 export interface IStyleContainerInput {
-  outline: boolean
+  error?: string,
+  outline: boolean,
   disable?: string,
   focus?: string,
 }
@@ -312,7 +313,8 @@ export interface IStyleTextInput {
 }
 
 export interface IStyleSelected {
-  outline: boolean
+  error?: string,
+  outline: boolean,
   disable?: string,
   focus?: string,
 }

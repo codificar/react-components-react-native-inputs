@@ -16,10 +16,7 @@ export type IColor = {
 
 export type IFont = {
   size?: number,
-  family?: string,
-  weight?: string,
   color?: IHexColor,
-  disabledColor?: IHexColor,
 }
 
 export interface IThemes {
@@ -27,7 +24,7 @@ export interface IThemes {
   colors?: IColor,
   font?: {
     label?: IFont,
-    placeholder?: IFont,
+    input?: IFont,
     error?: IFont,
   }
 }

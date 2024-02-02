@@ -36,17 +36,6 @@ export const TextLabel = styled.Text<IStyleTextLabel>`
     css`
       font-size: ${props.theme.size};
     `}
-
-  ${props => (props.theme.family) &&
-    css`
-      font-family: ${props.theme.family};
-    `}
-
-  ${props => (props.theme.weight) &&
-    css`
-      font-weight: ${props.theme.weight};
-    `}
-
 `;
 
 export const TextError = styled.Text<IStyleTextError>`
@@ -61,16 +50,6 @@ export const TextError = styled.Text<IStyleTextError>`
   ${props => (props.theme.size) &&
     css`
       font-size: ${props.theme.size};
-    `}
-
-  ${props => (props.theme.family) &&
-    css`
-      font-family: ${props.theme.family};
-    `}
-
-  ${props => (props.theme.weight) &&
-    css`
-      font-weight: ${props.theme.weight};
     `}
 `;
 
@@ -99,6 +78,20 @@ export const ContainerInput = styled.View<IStyleContainerInput>`
       border: 1px solid #ccc;
       border-radius: 4px;
     `}
+
+  ${props => (props.error) &&
+    css`
+      border-color: ${props.error};
+      border-bottom-width: 1px;
+    `}
+
+  ${props => (!!props.error && props.outline) &&
+    css`
+      border-color: ${props.error};
+      border-bottom-width: 1px;
+      border: 1px solid ${props.error};
+      border-radius: 4px;
+    `}
 `;
 
 export const PreTextInput = styled.TextInput<IStylePreTextInput>`
@@ -113,16 +106,6 @@ export const PreTextInput = styled.TextInput<IStylePreTextInput>`
     css`
       font-size: ${props.theme.size};
     `}
-
-  ${props => (props.theme.family) &&
-    css`
-      font-family: ${props.theme.family};
-    `}
-
-  ${props => (props.theme.weight) &&
-    css`
-      font-weight: ${props.theme.weight};
-    `}
 `;
 
 export const TextInput = styled.TextInput<IStyleTextInput>`
@@ -136,16 +119,6 @@ export const TextInput = styled.TextInput<IStyleTextInput>`
   ${props => (props.theme.size) &&
     css`
       font-size: ${props.theme.size};
-    `}
-
-  ${props => (props.theme.family) &&
-    css`
-      font-family: ${props.theme.family};
-    `}
-
-  ${props => (props.theme.weight) &&
-    css`
-      font-weight: ${props.theme.weight};
     `}
 `;
 
@@ -170,6 +143,20 @@ export const Selected = styled(ModalSelector)<IStyleSelected>`
   ${props => (props.outline) &&
     css`
       border: 1px solid #ccc;
+      border-radius: 4px;
+    `}
+
+    ${props => (props.error) &&
+    css`
+      border-color: ${props.error};
+      border-bottom-width: 1px;
+    `}
+
+  ${props => (!!props.error && props.outline) &&
+    css`
+      border-color: ${props.error};
+      border-bottom-width: 1px;
+      border: 1px solid ${props.error};
       border-radius: 4px;
     `}
 `

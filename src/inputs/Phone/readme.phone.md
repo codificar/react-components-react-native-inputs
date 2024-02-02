@@ -92,24 +92,15 @@ export default MyForm;
   font?: {
     label?: {
       size?: number,
-      family?: string,
-      weight?: string,
       color?: `#${string}` | string,
-      disabledColor?: `#${string}` | string,
     },
     placeholder?: {
       size?: number,
-      family?: string,
-      weight?: string,
       color?: `#${string}` | string,
-      disabledColor?: `#${string}` | string,
     },
     error?: {
       size?: number,
-      family?: string,
-      weight?: string,
       color?: `#${string}` | string,
-      disabledColor?: `#${string}` | string,
     },
   }
 }
