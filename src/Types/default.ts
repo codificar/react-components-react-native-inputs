@@ -23,6 +23,7 @@ export type IFont = {
 }
 
 export interface IThemes {
+  outline?: boolean,
   colors?: IColor,
   font?: {
     label?: IFont,
@@ -36,7 +37,7 @@ export interface IProps extends TextInputProps {
    * @description Function to get phone number
    * @type {React.Dispatch<string>}
   */
-  getValue: React.Dispatch<string>;
+  getValue?: React.Dispatch<string>;
   
   /**
    * @description Default value phone number
@@ -61,12 +62,6 @@ export interface IProps extends TextInputProps {
    * @type {boolean}
   */
   disabled?: string;
-  
-  /**
-   * @description Error message to be displayed in case of failed validation
-   * @type {string}
-  */
-  error?: string;
   
   /**
    * @description Theme for the phone component

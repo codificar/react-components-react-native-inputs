@@ -20,9 +20,9 @@
     "styled-components": "5.3.6"
   },
   "peerDependencies": {
+    "moment": ">=2.29.4",
     "react-native": ">=0.68.1",
-    "react-native-elements": ">=3.0.0-alpha.1",
-    "moment": ">=2.29.4"
+    "react-native-elements": ">=3.0.0-alpha.1"
   },
   "author": "Codificar - Felipe Zanetti",
   "bugs": {
@@ -30,6 +30,7 @@
   },
   "homepage": "https://git.codificar.com.br/react-components/react-native-inputs#readme",
   "devDependencies": {
+    "@types/react-native-elements": "^0.18.0",
     "@types/styled-components-react-native": "^5.2.1",
     "react-native": "0.68.1"
   }
