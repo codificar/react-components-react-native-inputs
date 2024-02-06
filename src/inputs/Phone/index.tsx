@@ -1,5 +1,5 @@
 // Modules
-import React, { forwardRef, useCallback, useEffect, useImperativeHandle, useRef, useState } from 'react';
+import React, { forwardRef, useCallback, useImperativeHandle, useRef, useState } from 'react';
 import { TextInput as TextInputRef } from 'react-native';
 import { Icon } from "react-native-elements";
 
@@ -33,10 +33,8 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
   {
     getValue,
     disabled = false,
-    defaultValue = '',
     theme = defaultProps.theme,
     language = defaultProps.language,
-    defaultSelected = defaultProps.defaultSelected,
     label = undefined,
     placeholder = undefined,
     countries = [],
@@ -76,16 +74,14 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
     }, "");
 
     setMaxLength(largestMask.length)
-    setValuePhone('')
     setCountry(value)
-    getValue && getValue('')
   }, []);
 
   const onChangeText = useCallback((INPUT: string, MASKS: string[]) => {
     setError('')
     const input = INPUT.replace(/\D/g, '');
 
-    if (!MASKS.length) return setError(translate.phone.error.maskNotFound)
+    if (!MASKS.length) return setError(translate.phone.error.countryNotFound)
 
     const largestMask = MASKS.reduce((larger, current) => {
       return current.length > larger.length ? current : larger;
@@ -119,22 +115,9 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
     }
   }, []);
 
-  useEffect(() => {
-    const currentPhone = dataPhones.find(country => defaultSelected === country.countryCode)
-
-    if (currentPhone) {
-      changeCountry(currentPhone)
-      onChangeText(defaultValue.replace(currentPhone.callingCode, ""), currentPhone.phoneMasks)
-    }
-  }, [changeCountry, onChangeText])
-
   useImperativeHandle(ref, () => ({
-    setValuePhone: ({valuePhone, valueCountry = 'BR'}) => {
+    setValuePhone: (valuePhone = '', valueCountry = 'BR') => {
       if (!valueCountry) return setError(translate.phone.error.countryNotFound)
-      if (!valuePhone) {
-        const labelError = label ? label.toLocaleLowerCase() : translate.phone.label
-        return setError(translate.phone.error.labelInvalid.replace('{{label}}', labelError))
-      }
 
       const currentPhone = dataPhones.find(country => valueCountry === country.countryCode)
       if (currentPhone) {
@@ -144,10 +127,10 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
     },
     setValueCountry: (valueCountry = 'BR') => {
       if (!valueCountry) return setError(translate.phone.error.countryNotFound)
+
       const currentPhone = dataPhones.find(country => valueCountry === country.countryCode)
       if (currentPhone) {
         changeCountry(currentPhone)
-        onChangeText(valuePhone.replace(currentPhone.callingCode, ""), currentPhone.phoneMasks)
       }
     },
     getValuePhone: () => {
@@ -175,7 +158,11 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
           outline={!!theme?.outline}
           data={renderDataSelected()}
           disable={disabled ? themes?.colors?.disabled : ''}
-          onChange={(value) => changeCountry(value as allPhoneInfoInTheWorld)}
+          onChange={(value) => {
+            changeCountry(value as allPhoneInfoInTheWorld)
+            setValuePhone('')
+            getValue && getValue('')
+          }}
         >
           <Row>
             <TextFlag>{country.flag}</TextFlag>
@@ -189,7 +176,7 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
           outline={!!theme?.outline}
           disable={disabled ? themes?.colors?.disabled : ''}
         >
-          {country.callingCode && <PreTextInput editable={false} theme={!disabled ? themes?.font?.input : themes?.font?.error}>{country.callingCode}</PreTextInput>}
+          {country.callingCode && <PreTextInput editable={false} theme={themes?.font?.input}>{country.callingCode}</PreTextInput>}
           <TextInput
             {...rest}
             ref={refInput}

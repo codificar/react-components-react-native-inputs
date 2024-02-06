@@ -5,18 +5,17 @@ const defaultColors: IColor = {
   background: '#FFF',
   primary: '#000',
   secondary: '#687a95',
-  disabled: '#C6CBD4',
+  disabled: '#EEE',
 }
 
-export const defaultProps: Omit<IPropsPhone, 'getValue' | 'defaultValue' | 'label' | 'placeholder'> = {
+export const defaultProps: Omit<IPropsPhone, 'getValue' | 'label' | 'placeholder'> = {
   language: 'pt-br',
-  defaultSelected: "BR",
   theme: {
     colors: defaultColors,
     font: {
       label: {
-        color: defaultColors.primary,
-        size: 16,
+        color: '#6C757D',
+        size: 12,
       },
       input: {
         color: '#000',
@@ -24,7 +23,7 @@ export const defaultProps: Omit<IPropsPhone, 'getValue' | 'defaultValue' | 'labe
       },
       error: {
         color: '#DC3545',
-        size: 14,
+        size: 12,
       },
     }
   },

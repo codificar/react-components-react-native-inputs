@@ -35,12 +35,6 @@ export interface IProps extends TextInputProps {
    * @type {React.Dispatch<string>}
   */
   getValue?: React.Dispatch<string>;
-  
-  /**
-   * @description Default value phone number
-   * @type {IThemes}
-  */
-  defaultValue: string;
 
   /**
    * @description Language for the phone component

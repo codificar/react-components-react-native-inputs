@@ -15,17 +15,15 @@ O componente Phone é um componente React projetado para simplificar o processo 
 
 ## Propriedades
 
-| Propriedade           | Tipo                     | Obrigatório | Descrição                                                                                                                                               |
-| --------------------- | ------------------------ | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **`countries`**       | `allCountryCodes[]`      | Não         | Filtra os países que aparecem no modal. Use códigos de país como `['BR', 'US', 'ES']` para limitar a seleção.                                           |
-| **`defaultSelected`** | `allCountryCodes`        | Não         | Define o país selecionado por padrão usando um código de país (ex.: 'BR', 'US'). Isso determina a seleção inicial e a formatação do número de telefone. |
-| **`getValue`**        | `React.Dispatch<string>` | Não         | Uma função de callback que fornece o número de telefone formatado ao componente pai ou ao estado do formulário.                                         |
-| **`defaultValue`**    | `string`                 | Não         | Define o valor padrão do campo de entrada do número de telefone.                                                                                        |
-| **`language`**        | `string`                 | Não         | Especifica o idioma para o componente, afetando rótulos e regras de formatação.                                                                         |
-| **`disabled`**        | `boolean`                | Não         | Se definido como `true`, desabilita o campo de entrada, prevenindo interação do usuário.                                                                |
-| **`theme`**           | `IThemes`                | Não         | Permite a personalização do estilo do componente Phone para combinar com o design do seu aplicativo.                                                    |
-| **`label`**           | `string`                 | Não         | Exibe um rótulo acima do campo de entrada do telefone.                                                                                                  |
-| **`placeholder`**     | `string`                 | Não         | Exibe um texto de placeholder dentro do campo de entrada quando está vazio.                                                                             |
+| Propriedade       | Tipo                     | Obrigatório | Padrão                  | Descrição                                                                                                       |
+| ----------------- | ------------------------ | ----------- | ----------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **`countries`**   | `allCountryCodes[]`      | Não         | `undefined`             | Filtra os países que aparecem no modal. Use códigos de país como `['BR', 'US', 'ES']` para limitar a seleção.   |
+| **`getValue`**    | `React.Dispatch<string>` | Não         | `undefined`             | Uma função de callback que fornece o número de telefone formatado ao componente pai ou ao estado do formulário. |
+| **`language`**    | `string`                 | Sim         | `"pt-br"`               | Especifica o idioma para o componente, afetando rótulos e regras de formatação.                                 |
+| **`disabled`**    | `boolean`                | Não         | `false`                 | Se definido como `true`, desabilita o campo de entrada, prevenindo interação do usuário.                        |
+| **`theme`**       | `IThemes`                | Não         | `undefined`             | Permite a personalização do estilo do componente Phone para combinar com o design do seu aplicativo.            |
+| **`label`**       | `string`                 | Não         | `"Telefone"`            | Exibe um rótulo acima do campo de entrada do telefone.                                                          |
+| **`placeholder`** | `string`                 | Não         | `"Insira seu telefone"` | Exibe um texto de placeholder dentro do campo de entrada quando está vazio.                                     |
 
 ## Exemplo de Uso
 
@@ -42,15 +40,15 @@ const MyForm = () => {
   const functionTest = useCallback(() => {
     // Forma de como setar o valor
     refPhone.current.setValuePhone({
-      valuePhone: "999999999",
+      valuePhone: "34912345678",
       valueCountry: "BR",
     });
 
     // Forma de como setar somente o país
     refPhone.current.setValueCountry("BR");
 
-    // Forma de pegar os valores, retorna {valuePhone: "999999999", valueCountry: "BR" }
-    refPhone.current.getValuePhone();
+    // Forma de pegar os valores, retorna {valuePhone: "(34) 91234-5678", valueCountry: "BR" }
+    const { valuePhone, valueCountry } = refPhone.current.getValuePhone();
 
     // Forma de passar um error personalizado
     refPhone.current.setErrorPhone("Telefone inválido");
@@ -62,10 +60,9 @@ const MyForm = () => {
   return (
     <View>
       <Phone
-        defaultValue=""
         language="pt-br"
-        defaultSelected="BR"
         countries={["BR", "US", "ES"]}
+        disabled={false}
         label="Número de Telefone"
         placeholder="Digite seu número de telefone"
       />
