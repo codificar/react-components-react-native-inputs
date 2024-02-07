@@ -110,11 +110,11 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
 
     if (!!mask){
       let output = '';
-      let contadorInput = 0;
+      let countInput = 0;
 
       for (let i = 0; i < mask.length; i++) {
-        if (contadorInput >= input.length) break;
-        output += mask[i] === '#' ? input[contadorInput++] : mask[i];
+        if (countInput >= input.length) break;
+        output += mask[i] === '#' ? input[countInput++] : mask[i];
       }
 
       setValuePhone(output);
@@ -143,7 +143,7 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
       }
     },
     getValuePhone: () => {
-      return { valuePhone, countryCode: country.countryCode }
+      return { valuePhone, countryCode: country.countryCode, callingCode: country.callingCode }
     },
     setErrorPhone: (error: string) => setError(error),
     isValid: () => {
