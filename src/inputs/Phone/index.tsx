@@ -13,7 +13,11 @@ import { getTranslate } from '../../locales';
 
 // Types
 import { IPropsPhone } from '../../Types';
-import { IPhoneRef, allPhoneInfoInTheWorld } from '../../Types/Phone';
+import {
+  IPhoneRef,
+  IPreparedMask,
+  allPhoneInfoInTheWorld
+} from '../../Types/Phone';
 
 // Styles
 import {
@@ -44,12 +48,15 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
 ) => {
   const refInput = useRef<TextInputRef>(null)
 
-  const [focus, setFocus] = useState<undefined | string>()
-  const [maxLength, setMaxLength] = useState(1)
-  const [errorMessage, setError] = useState<string>('')
-  const [translate] = useState(getTranslate(language))
   const [themes] = useState(getStyles(theme))
+  const [translate] = useState(getTranslate(language))
+
+  const [maxLength, setMaxLength] = useState<number>(1)
+  const [errorMessage, setError] = useState<string>('')
   const [valuePhone, setValuePhone] = useState<string>('')
+  const [isFocused, setIsFocus] = useState<undefined | string>()
+
+  const [lengthValid, setLengthValid] = useState<number>(1)
   const [country, setCountry] = useState<allPhoneInfoInTheWorld>({} as allPhoneInfoInTheWorld)
 
   const renderDataSelected = useCallback(() => {
@@ -92,20 +99,22 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
       return setError(translate.phone.error.labelInvalid.replace('{{label}}', labelError))
     }
 
-    const preparedMask = MASKS.map(value => ({
+    const preparedMask: IPreparedMask[] = MASKS.map(value => ({
       mask: value.replace(/\d/g, '#'),
       numSubstitutions: value.replace(/[^#]/g, '').length + value.replace(/\D/g, '').length,
     }));
 
-    const chosenMask = preparedMask.find(m => input.length <= m.numSubstitutions)?.mask;
+    const chosen = preparedMask.find(m => input.length <= m.numSubstitutions) as IPreparedMask;
+    const {mask, numSubstitutions} = chosen
+    setLengthValid(numSubstitutions)
 
-    if (!!chosenMask){
+    if (!!mask){
       let output = '';
       let contadorInput = 0;
 
-      for (let i = 0; i < chosenMask.length; i++) {
+      for (let i = 0; i < mask.length; i++) {
         if (contadorInput >= input.length) break;
-        output += chosenMask[i] === '#' ? input[contadorInput++] : chosenMask[i];
+        output += mask[i] === '#' ? input[contadorInput++] : mask[i];
       }
 
       setValuePhone(output);
@@ -137,8 +146,12 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
       return { valuePhone, countryCode: country.countryCode }
     },
     setErrorPhone: (error: string) => setError(error),
+    isValid: () => {
+      const onlyNumber = valuePhone.replace(/[^0-9]+/g, "")
+      return onlyNumber.length >= lengthValid
+    },
     focus: () => {
-      setFocus(theme?.colors?.primary)
+      setIsFocus(theme?.colors?.primary)
       refInput?.current?.focus()
     },
   }));
@@ -146,12 +159,12 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
   return (
     <Container>
       <TextLabel
-        focus={focus}
+        focus={isFocused}
         theme={!!errorMessage.length ? {...themes.font?.label, color: themes.font?.error.color} : themes.font?.label}
       >{label || translate.phone.label}</TextLabel>
       <Row>
         <Selected
-          focus={focus}
+          focus={isFocused}
           disabled={!!disabled}
           error={!!errorMessage.length ? themes?.font?.error?.color : ""}
           renderItem={() => <></>}
@@ -171,7 +184,7 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
         </Selected>
 
         <ContainerInput
-          focus={focus}
+          focus={isFocused}
           error={!!errorMessage.length ? themes?.font?.error?.color : ""}
           outline={!!theme?.outline}
           disable={disabled ? themes?.colors?.disabled : ''}
@@ -183,9 +196,9 @@ const Phone: React.ForwardRefRenderFunction<IPhoneRef, IPropsPhone> = (
             value={valuePhone}
             editable={!disabled}
             maxLength={maxLength}
-            onBlur={() => setFocus('')}
+            onBlur={() => setIsFocus('')}
             theme={themes?.font?.input}
-            onFocus={() => setFocus(themes.colors.primary)}
+            onFocus={() => setIsFocus(themes.colors.primary)}
             placeholder={placeholder || translate.phone.placeholder}
             onChangeText={text => onChangeText(text, country.phoneMasks || [])}
           />
