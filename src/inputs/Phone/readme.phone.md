@@ -15,15 +15,16 @@ O componente Phone é um componente React projetado para simplificar o processo 
 
 ## Propriedades
 
-| Propriedade       | Tipo                     | Obrigatório | Padrão                  | Descrição                                                                                                       |
-| ----------------- | ------------------------ | ----------- | ----------------------- | --------------------------------------------------------------------------------------------------------------- |
-| **`countries`**   | `allCountryCodes[]`      | Não         | `undefined`             | Filtra os países que aparecem no modal. Use códigos de país como `['BR', 'US', 'ES']` para limitar a seleção.   |
-| **`getValue`**    | `React.Dispatch<string>` | Não         | `undefined`             | Uma função de callback que fornece o número de telefone formatado ao componente pai ou ao estado do formulário. |
-| **`language`**    | `string`                 | Sim         | `"pt-br"`               | Especifica o idioma para o componente, afetando rótulos e regras de formatação.                                 |
-| **`disabled`**    | `boolean`                | Não         | `false`                 | Se definido como `true`, desabilita o campo de entrada, prevenindo interação do usuário.                        |
-| **`theme`**       | `IThemes`                | Não         | `undefined`             | Permite a personalização do estilo do componente Phone para combinar com o design do seu aplicativo.            |
-| **`label`**       | `string`                 | Não         | `"Telefone"`            | Exibe um rótulo acima do campo de entrada do telefone.                                                          |
-| **`placeholder`** | `string`                 | Não         | `"Insira seu telefone"` | Exibe um texto de placeholder dentro do campo de entrada quando está vazio.                                     |
+| Propriedade       | Tipo                      | Obrigatório | Padrão                  | Descrição                                                                                                       |
+| ----------------- | ------------------------- | ----------- | ----------------------- | --------------------------------------------------------------------------------------------------------------- |
+| **`countries`**   | `allCountryCodes[]`       | Não         | `undefined`             | Filtra os países que aparecem no modal. Use códigos de país como `['BR', 'US', 'ES']` para limitar a seleção.   |
+| **`getValue`**    | `React.Dispatch<string>`  | Não         | `undefined`             | Uma função de callback que fornece o número de telefone formatado ao componente pai ou ao estado do formulário. |
+| **`isValid`**     | `React.Dispatch<boolean>` | Não         | `undefined`             | Uma função de callback que fornece se o texto é válido.                                                         |
+| **`language`**    | `string`                  | Sim         | `"pt-br"`               | Especifica o idioma para o componente, afetando rótulos e regras de formatação.                                 |
+| **`disabled`**    | `boolean`                 | Não         | `false`                 | Se definido como `true`, desabilita o campo de entrada, prevenindo interação do usuário.                        |
+| **`theme`**       | `IThemes`                 | Não         | `undefined`             | Permite a personalização do estilo do componente Phone para combinar com o design do seu aplicativo.            |
+| **`label`**       | `string`                  | Não         | `"Telefone"`            | Exibe um rótulo acima do campo de entrada do telefone.                                                          |
+| **`placeholder`** | `string`                  | Não         | `"Insira seu telefone"` | Exibe um texto de placeholder dentro do campo de entrada quando está vazio.                                     |
 
 ## Exemplo de Uso
 
@@ -32,7 +33,7 @@ Abaixo está um exemplo básico de uso do componente Phone dentro de um formulá
 ```tsx
 import React, { useState } from "react";
 import { View } from "react-native";
-import Phone from "./Phone"; // Ajuste o caminho de importação de acordo com sua configuração
+import { PhoneInput } from "react-native-inputs"; // Ajuste o caminho de importação de acordo com sua configuração
 
 const MyForm = () => {
   const refPhone = useRef(null);
@@ -55,11 +56,15 @@ const MyForm = () => {
 
     // Forma dar foco ao input
     refPhone.current.focus();
+
+    // Forma validar o input
+    const isValidPhone = refPhone.current.isValid(); // true or false
   }, []);
 
   return (
     <View>
-      <Phone
+      <PhoneInput
+        ref={refPhone}
         language="pt-br"
         countries={["BR", "US", "ES"]}
         disabled={false}
