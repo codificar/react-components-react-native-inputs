@@ -48,8 +48,9 @@ const MyForm = () => {
     // Forma de como setar somente o país
     refPhone.current.setValueCountry("BR");
 
-    // Forma de pegar os valores, retorna {valuePhone: "(34) 91234-5678", valueCountry: "BR" }
-    const { valuePhone, valueCountry } = refPhone.current.getValuePhone();
+    // Forma de pegar os valores, retorna {valuePhone: "(34) 91234-5678", countryCode: "BR", callingCode: "+55" }
+    const { valuePhone, countryCode, callingCode } =
+      refPhone.current.getValuePhone();
 
     // Forma de passar um error personalizado
     refPhone.current.setErrorPhone("Telefone inválido");
