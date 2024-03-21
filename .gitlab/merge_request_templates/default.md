@@ -2,9 +2,11 @@
 
 <!-- explicação do que foi feito -->
 
-## Link da task no Redmine
-<!-- cole aqui o link da tarefa criada no redmine -->
-https://redmine.codificar.com.br/issues/
+## Link da task no Work
+
+<!-- cole aqui o link da tarefa criada no work -->
+
+https://work.cods.dev/account/tasks/
 
 ## Screenshots e GIFs 📸
 
