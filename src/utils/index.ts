@@ -1,8 +1,8 @@
 // Types
-import { IThemes } from "react-native-inputs/src/Types";
+import { IThemes } from "../Types";
 
 // Utils
-import { defaultProps } from "react-native-inputs/src/utils/constants/props/phone";
+import { defaultProps } from "./constants/props/phone";
 
 const getStyles = (theme?: IThemes) => {
   const colors = {
