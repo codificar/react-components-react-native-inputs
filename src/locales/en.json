@@ -251,5 +251,15 @@
       "ZM": "Zambia",
       "ZW": "Zimbabwe"
     }
+  },
+  "datePicker": {
+    "label": "Date of birth",
+    "placeholder": "Enter a date of birth",
+    "cancelText": "Cancel",
+    "confirmText": "Confirm",
+    "title": "Select a date",
+    "error": {
+      "dateInvalid": "Enter a valid date"
+    }
   }
 }

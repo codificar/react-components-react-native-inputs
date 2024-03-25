@@ -251,5 +251,15 @@
       "ZM": "Zambia",
       "ZW": "Zimbabue"
     }
+  },
+  "datePicker": {
+    "label": "Fecha de nacimiento",
+    "placeholder": "Ingrese una fecha de nacimiento",
+    "cancelText": "Cancelar",
+    "confirmText": "Confirmar",
+    "title": "Seleccione una fecha",
+    "error": {
+      "dateInvalid": "Introduzca una fecha válida"
+    }
   }
 }
