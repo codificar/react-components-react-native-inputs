@@ -63,11 +63,6 @@ export const ContainerInput = styled.View<IStyleContainerInput>`
   padding: 0 8px ;
   height: 40px;
 
-  ${props => (props.focus) &&
-    css`
-      border-color: ${props.focus};
-    `}
-
   ${props => (props.disable) &&
     css`
       background-color: ${props.disable};
@@ -77,6 +72,11 @@ export const ContainerInput = styled.View<IStyleContainerInput>`
     css`
       border: 1px solid #ccc;
       border-radius: 4px;
+    `}
+
+  ${props => (props.focus) &&
+    css`
+      border-color: ${props.focus};
     `}
 
   ${props => (props.error) &&

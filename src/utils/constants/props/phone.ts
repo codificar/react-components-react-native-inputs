@@ -1,14 +1,10 @@
 // Types
-import { IColor, IPropsPhone } from "../../../Types";
+import { IPropsPhone } from "../../../Types";
 
-const defaultColors: IColor = {
-  background: '#FFF',
-  primary: '#000',
-  secondary: '#687a95',
-  disabled: '#EEE',
-}
+// Utils
+import { defaultColors } from "../../../utils";
 
-export const defaultProps: Omit<IPropsPhone, 'getValue' | 'label' | 'placeholder'> = {
+export const defaultProps: Pick<IPropsPhone, 'theme' | 'language'> = {
   language: 'pt-br',
   theme: {
     colors: defaultColors,
