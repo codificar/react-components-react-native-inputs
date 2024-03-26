@@ -32,6 +32,18 @@ export interface IDatePickerRef {
   isValid: React.Dispatch<boolean>;
 
   /**
+   * @description Checks if the date has a minimum age
+   * @param value number
+   */
+  isValidMinAge: (value: number) => boolean;
+
+  /**
+   * @description Triggers clear on the date picker input field.
+   * @type {React.Dispatch<void>}
+   */
+  clear: React.Dispatch<void>;
+
+  /**
    * @description Triggers focus on the date picker input field.
    * @type {React.Dispatch<void>}
    */

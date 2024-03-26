@@ -2,7 +2,7 @@
 import React, { forwardRef, useCallback, useImperativeHandle, useState } from 'react';
 import { ptBR, es } from 'date-fns/locale';
 import { Icon } from "react-native-elements";
-import { format, isValid as isValidDate } from 'date-fns';
+import { format, isValid as isValidDate, subYears, isBefore, isEqual } from 'date-fns';
 import RNDatePicker from 'react-native-date-picker'
 
 // Locales
@@ -77,6 +77,17 @@ const DatePicker: React.ForwardRefRenderFunction<IDatePickerRef, IPropsDatePicke
     setErrorDate: (error: string) => setError(error),
     isValid: () => {
       return isValidDate(valueDate)
+    },
+    isValidMinAge: (minAge: number) => {
+      if (!valueDate || !isValidDate(valueDate)) return false
+
+      const yearsAgo = subYears(new Date(), minAge);
+      return isBefore(valueDate, yearsAgo) || isEqual(valueDate, yearsAgo);
+    },
+    clear: () => {
+      setError('')
+      setIsFocus('')
+      setValue(undefined)
     },
     focus: () => {
       setIsFocus(theme?.colors?.primary)
