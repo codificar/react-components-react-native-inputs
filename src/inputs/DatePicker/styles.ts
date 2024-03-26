@@ -107,3 +107,8 @@ export const TextInput = styled.Text<IStyleTextInput>`
       font-size: ${props.theme.size}px;
     `}
 `;
+
+export const TextPlaceHolder = styled.Text`
+  flex: 1;
+  color: #999;
+`;

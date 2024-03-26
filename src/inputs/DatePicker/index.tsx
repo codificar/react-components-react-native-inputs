@@ -17,7 +17,7 @@ import { getStyles } from '../../utils';
 import { defaultProps } from '../../utils/constants/props/datePicker';
 
 // Styles
-import { Container, TextLabel, ContainerInput, TextInput, TextError } from './styles';
+import { Container, TextLabel, ContainerInput, TextInput, TextError, TextPlaceHolder } from './styles';
 
 const DatePicker: React.ForwardRefRenderFunction<IDatePickerRef, IPropsDatePicker> = (
   {
@@ -113,7 +113,7 @@ const DatePicker: React.ForwardRefRenderFunction<IDatePickerRef, IPropsDatePicke
 
         {valueDate
           ? <TextInput>{format(valueDate, getLocaleDate().pattern, {locale: getLocaleDate().locale})}</TextInput>
-          : <TextInput>{placeholder || translate.datePicker.placeholder}</TextInput>
+          : <TextPlaceHolder>{placeholder || translate.datePicker.placeholder}</TextPlaceHolder>
         }
 
         {showIcon &&
