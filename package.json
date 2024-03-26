@@ -17,13 +17,13 @@
   "license": "MIT",
   "dependencies": {
     "date-fns": "^3.6.0",
-    "react-native-date-picker": "^4.4.2",
     "react-native-modal-selector-searchable": "^2.1.6",
     "styled-components": "5.3.6"
   },
   "peerDependencies": {
     "react-native": ">=0.68.1",
-    "react-native-elements": ">=3.0.0-alpha.1"
+    "react-native-elements": ">=3.0.0-alpha.1",
+    "react-native-date-picker": "^5.0.0"
   },
   "author": "Codificar - Felipe Zanetti",
   "bugs": {

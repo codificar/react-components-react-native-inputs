@@ -65,6 +65,18 @@ const DatePicker: React.ForwardRefRenderFunction<IDatePickerRef, IPropsDatePicke
 
   useImperativeHandle(ref, () => ({
     setValueDate: (value) => {
+      let newDate = value
+      if (typeof newDate === 'string') {
+        newDate = newDate.split('T')[0]
+        if (newDate.includes('-')) {
+          const [YEAR, MOUNTH, DAY] = newDate.split('-')
+          newDate = new Date(Number(YEAR), Number(MOUNTH)-1, Number(DAY))
+        } else {
+          const [DAY, MOUNTH, YEAR] = newDate.split('/')
+          newDate = new Date(Number(YEAR), Number(MOUNTH)-1, Number(DAY))
+        }
+      }
+      
       if (!(value instanceof Date)) return setError(translate.datePicker.error.dateInvalid)
 
       setValue(value)

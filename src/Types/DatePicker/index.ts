@@ -12,7 +12,7 @@ export interface IDatePickerRef {
    * Sets the date value for the date picker.
    * @param value - The date to set in the date picker.
    */
-  setValueDate: (value: Date) => void;
+  setValueDate: (value: Date | string) => void;
 
   /**
    * Retrieves the current date value from the date picker.
