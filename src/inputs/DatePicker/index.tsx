@@ -29,6 +29,7 @@ const DatePicker: React.ForwardRefRenderFunction<IDatePickerRef, IPropsDatePicke
     label = undefined,
     placeholder = undefined,
     theme = defaultProps.theme,
+    onSubmitEditing = undefined,
     language = defaultProps.language,
   },
   ref
@@ -46,6 +47,8 @@ const DatePicker: React.ForwardRefRenderFunction<IDatePickerRef, IPropsDatePicke
     setValue(value)
     setOpenDatePicker(false)
     setIsFocus('')
+    setError('')
+    onSubmitEditing && onSubmitEditing()
   }, [])
 
   const handleOpenModal = useCallback((state: boolean) => {
@@ -65,20 +68,7 @@ const DatePicker: React.ForwardRefRenderFunction<IDatePickerRef, IPropsDatePicke
 
   useImperativeHandle(ref, () => ({
     setValueDate: (value) => {
-      let newDate = value
-      if (typeof newDate === 'string') {
-        newDate = newDate.split('T')[0]
-        if (newDate.includes('-')) {
-          const [YEAR, MOUNTH, DAY] = newDate.split('-')
-          newDate = new Date(Number(YEAR), Number(MOUNTH)-1, Number(DAY))
-        } else {
-          const [DAY, MOUNTH, YEAR] = newDate.split('/')
-          newDate = new Date(Number(YEAR), Number(MOUNTH)-1, Number(DAY))
-        }
-      }
-      
       if (!(value instanceof Date)) return setError(translate.datePicker.error.dateInvalid)
-
       setValue(value)
     },
     getValueDate: () => {

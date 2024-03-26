@@ -2,38 +2,37 @@
 import { IFont, IThemes } from "../default";
 
 /**
- * Interface for date picker reference management.
- * Provides methods and properties to manage date input fields within a React component.
+ * @description Interface for date picker reference management. Provides methods and properties to manage date input fields within a React component.
  *
  * @interface IDatePickerRef
  */
 export interface IDatePickerRef {
   /**
-   * Sets the date value for the date picker.
+   * @description Sets the date value for the date picker.
    * @param value - The date to set in the date picker.
    */
-  setValueDate: (value: Date | string) => void;
+  setValueDate: (value: Date) => void;
 
   /**
-   * Retrieves the current date value from the date picker.
+   * @description Retrieves the current date value from the date picker.
    * @type {React.Dispatch<void>}
    */
   getValueDate: React.Dispatch<void>;
 
   /**
-   * Sets the error message for the date picker.
+   * @description Sets the error message for the date picker.
    * @type {React.Dispatch<string>}
    */
   setErrorDate: React.Dispatch<string>;
 
   /**
-   * Dispatches the validation status of the date picker's current date value.
+   * @description Dispatches the validation status of the date picker's current date value.
    * @type {React.Dispatch<boolean>}
    */
   isValid: React.Dispatch<boolean>;
 
   /**
-   * Triggers focus on the date picker input field.
+   * @description Triggers focus on the date picker input field.
    * @type {React.Dispatch<void>}
    */
   focus: React.Dispatch<void>;
@@ -41,8 +40,7 @@ export interface IDatePickerRef {
 
 
 /**
- * Date component properties
- * 
+ * @description Date component properties
  * @interface IPropsDatePicker
  */
 export interface IPropsDatePicker {
@@ -99,6 +97,12 @@ export interface IPropsDatePicker {
    * @type {IThemes}
   */
   theme?: IThemes;
+
+  /**
+   * @description Function triggered when finishing editing
+   * @type {React.Dispatch<void>}
+   */
+  onSubmitEditing?: React.Dispatch<void>
 }
 
 export interface IStyleTextLabel {
