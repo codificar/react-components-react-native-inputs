@@ -13,17 +13,18 @@ O componente DatePicker permite ao usuário selecionar uma data específica por 
 
 ## Propriedades
 
-| Propriedade       | Tipo      | Obrigatório | Padrão                  | Descrição                                                                                            |
-| ----------------- | --------- | ----------- | ----------------------- | ---------------------------------------------------------------------------------------------------- |
-| **`language`**    | `string`  | Sim         | `"pt-br"`               | Especifica o idioma para o componente, afetando rótulos e regras de formatação.                      |
-| **`disabled`**    | `boolean` | Não         | `false`                 | Se definido como `true`, desabilita o campo de entrada, prevenindo interação do usuário.             |
-| **`theme`**       | `IThemes` | Não         | `undefined`             | Permite a personalização do estilo do componente Phone para combinar com o design do seu aplicativo. |
-| **`label`**       | `string`  | Não         | `"Telefone"`            | Exibe um rótulo acima do campo de entrada do telefone.                                               |
-| **`placeholder`** | `string`  | Não         | `"Insira seu telefone"` | Exibe um texto de placeholder dentro do campo de entrada quando está vazio.                          |
-| **`confirmText`** | `string`  | Não         | `"Confirmar"`           | Texto do botão para confirmar a seleção.                                                             |
-| **`cancelText`**  | `string`  | Não         | `"Cancelar"`            | Texto do botão para cancelar a seleção.                                                              |
-| **`title`**       | `string`  | Não         | `"Insira seu telefone"` | Título exibido no modal de seleção de data.                                                          |
-| **`showIcon`**    | `boolean` | Não         | `true`                  | Exibe ou oculta o ícone do calendário.                                                               |
+| Propriedade           | Tipo                   | Obrigatório | Padrão                  | Descrição                                                                                            |
+| --------------------- | ---------------------- | ----------- | ----------------------- | ---------------------------------------------------------------------------------------------------- |
+| **`language`**        | `string`               | Sim         | `"pt-br"`               | Especifica o idioma para o componente, afetando rótulos e regras de formatação.                      |
+| **`disabled`**        | `boolean`              | Não         | `false`                 | Se definido como `true`, desabilita o campo de entrada, prevenindo interação do usuário.             |
+| **`theme`**           | `IThemes`              | Não         | `undefined`             | Permite a personalização do estilo do componente Phone para combinar com o design do seu aplicativo. |
+| **`label`**           | `string`               | Não         | `"Telefone"`            | Exibe um rótulo acima do campo de entrada do telefone.                                               |
+| **`placeholder`**     | `string`               | Não         | `"Insira seu telefone"` | Exibe um texto de placeholder dentro do campo de entrada quando está vazio.                          |
+| **`confirmText`**     | `string`               | Não         | `"Confirmar"`           | Texto do botão para confirmar a seleção.                                                             |
+| **`cancelText`**      | `string`               | Não         | `"Cancelar"`            | Texto do botão para cancelar a seleção.                                                              |
+| **`title`**           | `string`               | Não         | `"Insira seu telefone"` | Título exibido no modal de seleção de data.                                                          |
+| **`showIcon`**        | `boolean`              | Não         | `true`                  | Exibe ou oculta o ícone do calendário.                                                               |
+| **`onSubmitEditing`** | `React.Dispatch<void>` | Não         | `undefined`             | Função executada ao finalizar a edição.                                                              |
 
 ## Exemplo de Uso
 

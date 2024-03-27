@@ -10,7 +10,7 @@ Siga as instruções específicas de configuração de cada uma, disponíveis em
 
 Garantir que essas bibliotecas estejam corretamente instaladas e configuradas é fundamental para o funcionamento adequado do componente no seu projeto. Em caso de dúvidas ou problemas, consulte a documentação de cada biblioteca para obter orientações detalhadas e soluções de problemas comuns.
 
-## Bibliotecas necessárias para todos os componentes
+## Bibliotecas utilizadas em todos os componentes
 
 | Nome                    | Versão            | Descrição                                             | Documentação                                                                                                                                        |
 | ----------------------- | ----------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -18,13 +18,13 @@ Garantir que essas bibliotecas estejam corretamente instaladas e configuradas é
 | `react-native-elements` | `>=3.0.0-alpha.1` | [DOC](https://reactnativeelements.com/docs)           | Oferece uma variedade de componentes de interface pré-construídos e personalizáveis, melhorando significativamente a eficiência do desenvolvimento. |
 | `styled-components`     | `5.3.6`           | [DOC](https://styled-components.com/)                 | Primitivas visuais para a idade dos componentes. Use o que há de melhor em ES6 e CSS para estilizar seus aplicativos sem estresse                   |
 
-## Bibliotecas para o [**INPUT DE TELEFONE**](./doc/phone.md)
+## Bibliotecas utilizadas para o [**INPUT DE TELEFONE**](./doc/phone.md)
 
 | Nome                                     | Versão    | Descrição                                                               | Documentação                                                                                                                           |
 | ---------------------------------------- | --------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
 | `react-native-modal-selector-searchable` | `>=2.1.6` | [DOC](https://github.com/hepter/react-native-modal-selector-searchable) | Um componente seletor de plataforma cruzada (iOS/Android) para React Native que é altamente personalizável e oferece suporte a seções. |
 
-## Bibliotecas para o [**INPUT DE DATA**](./doc/datePicker.md)
+## Bibliotecas utilizadas para o [**INPUT DE DATA**](./doc/datePicker.md)
 
 | Nome                       | Versão    | Descrição                                                      | Documentação                                                                                                                                                                                                                                                                                          |
 | -------------------------- | --------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
