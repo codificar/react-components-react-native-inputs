@@ -94,7 +94,7 @@ const DatePicker: React.ForwardRefRenderFunction<
         setValue(value);
       },
       getValueDate: () => {
-        if (valueDate) return { valueDate: format(valueDate, "yyyy-MM-dd") };
+        return { valueDate: valueDate ? format(valueDate, "yyyy-MM-dd") : null };
       },
       setErrorDate: (error: string) => setError(error),
       isValid: () => {
