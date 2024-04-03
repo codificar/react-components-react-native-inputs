@@ -1,3 +1,6 @@
+// Modules
+import { DatePickerProps } from "react-native-date-picker";
+
 // Types
 import { IFont, IThemes } from "../default";
 
@@ -55,7 +58,7 @@ export interface IDatePickerRef {
  * @description Date component properties
  * @interface IPropsDatePicker
  */
-export interface IPropsDatePicker {
+export interface IPropsDatePicker extends Omit<DatePickerProps, 'theme'>{
   /**
    * @description Language for the phone component
    * @type {string}

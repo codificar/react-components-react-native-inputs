@@ -52,6 +52,7 @@ const DatePicker: React.ForwardRefRenderFunction<
     theme = defaultProps.theme,
     onSubmitEditing = undefined,
     language = defaultProps.language,
+    ...rest
   },
   ref
 ) => {
@@ -61,11 +62,13 @@ const DatePicker: React.ForwardRefRenderFunction<
     const [isFocused, setIsFocus] = useState<undefined | string>();
     const [errorMessage, setError] = useState<string>("");
 
-    const [valueDate, setValue] = useState<undefined | Date>(undefined);
+    const [dateValue, setDateValue] = useState<undefined | Date>(undefined);
+    const [defaultValue] = useState<Date>(rest.maximumDate || new Date());
+
     const [openDatePicker, setOpenDatePicker] = useState(false);
 
     const handleChangeValue = useCallback((value: Date) => {
-      setValue(value);
+      setDateValue(value);
       setOpenDatePicker(false);
       setIsFocus("");
       setError("");
@@ -91,25 +94,25 @@ const DatePicker: React.ForwardRefRenderFunction<
       setValueDate: (value) => {
         if (!(value instanceof Date))
           return setError(translate.datePicker.error.dateInvalid);
-        setValue(value);
+        setDateValue(value);
       },
       getValueDate: () => {
-        return { valueDate: valueDate ? format(valueDate, "yyyy-MM-dd") : null };
+        return { dateValue: dateValue ? format(dateValue, "yyyy-MM-dd") : null };
       },
       setErrorDate: (error: string) => setError(error),
       isValid: () => {
-        return isValidDate(valueDate);
+        return isValidDate(dateValue);
       },
       isValidMinAge: (minAge: number) => {
-        if (!valueDate || !isValidDate(valueDate)) return false;
+        if (!dateValue || !isValidDate(dateValue)) return false;
 
         const yearsAgo = subYears(new Date(), minAge);
-        return isBefore(valueDate, yearsAgo) || isEqual(valueDate, yearsAgo);
+        return isBefore(dateValue, yearsAgo) || isEqual(dateValue, yearsAgo);
       },
       clear: () => {
         setError("");
         setIsFocus("");
-        setValue(undefined);
+        setDateValue(undefined);
       },
       focus: () => {
         setIsFocus(theme?.colors?.primary);
@@ -138,10 +141,11 @@ const DatePicker: React.ForwardRefRenderFunction<
           error={!!errorMessage.length ? themes?.font?.error?.color : ""}
         >
           <RNDatePicker
+            {...rest}
             modal
             mode="date"
             open={openDatePicker}
-            date={valueDate || new Date()}
+            date={dateValue || defaultValue}
             onConfirm={handleChangeValue}
             onCancel={() => handleOpenModal(false)}
             title={title || translate.datePicker.title}
@@ -149,9 +153,9 @@ const DatePicker: React.ForwardRefRenderFunction<
             confirmText={confirmText || translate.datePicker.confirmText}
           />
 
-          {valueDate ? (
+          {dateValue ? (
             <TextInput>
-              {format(valueDate, getLocaleDate().pattern, {
+              {format(dateValue, getLocaleDate().pattern, {
                 locale: getLocaleDate().locale,
               })}
             </TextInput>
