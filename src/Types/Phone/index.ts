@@ -252,14 +252,47 @@ export type allPhoneInfoInTheWorld = {
   countryCode: allCountryCodes;
   phoneMasks: string[];
 }
-
+/**
+ * Interface for phone reference management.
+ * Provides methods and properties to manage phone input fields within a React component.
+ */
 export interface IPhoneRef {
-	setValuePhone: (valuePhone: string, valueCountry?: allCountryCodes) => void;
-	setValueCountry: React.Dispatch<allCountryCodes>;
-	getValuePhone: React.Dispatch<void>;
-	setErrorPhone: React.Dispatch<string>;
-	isValid: React.Dispatch<boolean>;
-	focus: React.Dispatch<void>;
+  /**
+   * Sets the phone number value.
+   * @param valuePhone - The phone number to set.
+   * @param valueCountry - Optional. The country code associated with the phone number.
+   */
+  setValuePhone: (valuePhone: string, valueCountry?: allCountryCodes) => void;
+
+  /**
+   * React dispatcher to set the current country code.
+   * @type {React.Dispatch<allCountryCodes>}
+   */
+  setValueCountry: React.Dispatch<allCountryCodes>;
+
+  /**
+   * Retrieves the current phone number value.
+   * @type {React.Dispatch<void>}
+   */
+  getValuePhone: React.Dispatch<void>;
+
+  /**
+   * Sets the error message for the phone number.
+   * @type {React.Dispatch<string>}
+   */
+  setErrorPhone: React.Dispatch<string>;
+
+  /**
+   * Dispatches the validation status of the phone number.
+   * @type {React.Dispatch<boolean>}
+   */
+  isValid: React.Dispatch<boolean>;
+
+  /**
+   * Triggers focus on the phone number input field.
+   * @type {React.Dispatch<void>}
+   */
+  focus: React.Dispatch<void>;
 }
 
 /**
