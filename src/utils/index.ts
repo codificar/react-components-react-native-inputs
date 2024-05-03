@@ -1,8 +1,15 @@
 // Types
-import { IThemes } from "../Types";
+import { IColor, IThemes } from "../Types";
 
 // Utils
 import { defaultProps } from "./constants/props/phone";
+
+const defaultColors: IColor = {
+  background: '#FFF',
+  primary: '#000',
+  secondary: '#687a95',
+  disabled: '#EEE',
+}
 
 const getStyles = (theme?: IThemes) => {
   const colors = {
@@ -30,4 +37,4 @@ const getStyles = (theme?: IThemes) => {
   return {colors, font}
 }
 
-export { getStyles }
+export { getStyles, defaultColors }

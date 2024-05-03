@@ -10,22 +10,36 @@ Siga as instruções específicas de configuração de cada uma, disponíveis em
 
 Garantir que essas bibliotecas estejam corretamente instaladas e configuradas é fundamental para o funcionamento adequado do componente no seu projeto. Em caso de dúvidas ou problemas, consulte a documentação de cada biblioteca para obter orientações detalhadas e soluções de problemas comuns.
 
-## Bibliotecas para o [**INPUT DE TELEFONE**](./src/inputs/Phone/readme.phone.md)
+## Bibliotecas utilizadas em todos os componentes
 
 | Nome                    | Versão            | Descrição                                             | Documentação                                                                                                                                        |
 | ----------------------- | ----------------- | ----------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `react-native`          | `>=0.68.1`        | [DOC](https://reactnative.dev/docs/environment-setup) | O framework base para o desenvolvimento do aplicativo. Certifique-se de que sua versão seja compatível para evitar conflitos. RN                    |
 | `react-native-elements` | `>=3.0.0-alpha.1` | [DOC](https://reactnativeelements.com/docs)           | Oferece uma variedade de componentes de interface pré-construídos e personalizáveis, melhorando significativamente a eficiência do desenvolvimento. |
+| `styled-components`     | `5.3.6`           | [DOC](https://styled-components.com/)                 | Primitivas visuais para a idade dos componentes. Use o que há de melhor em ES6 e CSS para estilizar seus aplicativos sem estresse                   |
+
+## Bibliotecas utilizadas para o [**INPUT DE TELEFONE**](./doc/phone.md)
+
+| Nome                                     | Versão    | Descrição                                                               | Documentação                                                                                                                           |
+| ---------------------------------------- | --------- | ----------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| `react-native-modal-selector-searchable` | `>=2.1.6` | [DOC](https://github.com/hepter/react-native-modal-selector-searchable) | Um componente seletor de plataforma cruzada (iOS/Android) para React Native que é altamente personalizável e oferece suporte a seções. |
+
+## Bibliotecas utilizadas para o [**INPUT DE DATA**](./doc/datePicker.md)
+
+| Nome                       | Versão    | Descrição                                                      | Documentação                                                                                                                                                                                                                                                                                          |
+| -------------------------- | --------- | -------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `date-fns`                 | `>=3.6.0` | [DOC](https://date-fns.org/)                                   | date-fns fornece o conjunto de ferramentas mais abrangente, porém simples e consistente para manipular datas JavaScript                                                                                                                                                                               |
+| `react-native-date-picker` | `>=5.0.0` | [DOC](https://github.com/henninghall/react-native-date-picker) | React Native Date Picker é um seletor de data e hora para Android e iOS. Inclui modos de seleção de data, hora e data e hora. O selecionador de data é personalizável e oferece suporte a diferentes idiomas. Ele foi escrito com código nativo para obter a melhor aparência e desempenho possíveis. |
 
 ## Componentes Disponíveis
 
+Para cada componente, você encontrará detalhes sobre como implementá-lo, opções de personalização disponíveis, propriedades esperadas, e exemplos de código para ajudar na sua integração
+
 Abaixo, você encontrará links para a documentação de cada componente disponível na biblioteca:
 
-- [**INPUT DE TELEFONE**](./src/inputs/Phone/readme.phone.md): Permite a entrada de números de telefone com formatação automática para diferentes padrões internacionais.
+- [**INPUT DE TELEFONE**](./doc/phone.md): Permite a entrada de números de telefone com formatação automática para diferentes padrões internacionais.
+- [**INPUT DE DATA**](./doc/datePicker.md): Um seletor de data que facilita a escolha de datas específicas.
 
 [//]: - "Input Simples - Fornece um campo de entrada básico com opções de personalização para cor, borda, etc."
-[//]: - "DatePicker - Um seletor de data e hora que facilita a escolha de datas específicas ou intervalos de datas."
 [//]: - "Selected - Um componente de seleção que oferece uma lista de opções a partir das quais os usuários podem escolher."
 [//]: - "Mais Componentes - Conforme novos componentes são adicionados à biblioteca, suas documentações serão listadas aqui."
-
-Para cada componente, você encontrará detalhes sobre como implementá-lo, opções de personalização disponíveis, propriedades esperadas, e exemplos de código para ajudar na sua integração

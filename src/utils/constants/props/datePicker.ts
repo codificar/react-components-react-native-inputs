@@ -1,10 +1,10 @@
 // Types
-import { IPropsPhone } from "../../../Types";
+import { IPropsDatePicker } from "../../../Types";
 
 // Utils
 import { defaultColors } from "../../../utils";
 
-export const defaultProps: Pick<IPropsPhone, 'theme' | 'language'> = {
+export const defaultProps: Pick<IPropsDatePicker, 'language' | 'theme'> = {
   language: 'pt-br',
   theme: {
     colors: defaultColors,
