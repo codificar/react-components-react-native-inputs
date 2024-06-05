@@ -5,6 +5,7 @@ import React, {
   useImperativeHandle,
   useState,
 } from "react";
+import { Platform, Modal, View, Button } from "react-native";
 import { ptBR, es } from "date-fns/locale";
 import { Icon } from "react-native-elements";
 import {
@@ -14,7 +15,8 @@ import {
   isBefore,
   isEqual,
 } from "date-fns";
-import RNDatePicker from "react-native-date-picker";
+import DateTimePicker from "@react-native-community/datetimepicker";
+import moment from 'moment';
 
 // Locales
 import { getTranslate } from "../../locales";
@@ -52,6 +54,7 @@ const DatePicker: React.ForwardRefRenderFunction<
     theme = defaultProps.theme,
     onSubmitEditing = undefined,
     language = defaultProps.language,
+    purposeOfUse = undefined,
     ...rest
   },
   ref
@@ -67,12 +70,25 @@ const DatePicker: React.ForwardRefRenderFunction<
 
     const [openDatePicker, setOpenDatePicker] = useState(false);
 
-    const handleChangeValue = useCallback((value: Date) => {
-      setDateValue(value);
-      setOpenDatePicker(false);
-      setIsFocus("");
-      setError("");
-      onSubmitEditing && onSubmitEditing();
+    const handleChangeValue = useCallback((event: any, value?: Date) => {
+      if (Platform.OS === 'android') {
+        if (value === undefined) return handleOpenModal(false);
+        setDateValue(value);
+        setOpenDatePicker(false);
+        setIsFocus("");
+        setError("");
+        onSubmitEditing && onSubmitEditing();
+      } else {
+        if (event.type === 'set') {
+          setDateValue(value);
+          setOpenDatePicker(false);
+          setIsFocus("");
+          setError("");
+          onSubmitEditing && onSubmitEditing();
+        } else {
+          setOpenDatePicker(false);
+        }
+      }
     }, []);
 
     const handleOpenModal = useCallback((state: boolean) => {
@@ -131,6 +147,7 @@ const DatePicker: React.ForwardRefRenderFunction<
           }
         >
           {label || translate.datePicker.label}
+
         </TextLabel>
         <ContainerInput
           focus={isFocused}
@@ -140,18 +157,48 @@ const DatePicker: React.ForwardRefRenderFunction<
           disable={disabled ? themes?.colors?.disabled : ""}
           error={!!errorMessage.length ? themes?.font?.error?.color : ""}
         >
-          <RNDatePicker
-            {...rest}
-            modal
-            mode="date"
-            open={openDatePicker}
-            date={dateValue || defaultValue}
-            onConfirm={handleChangeValue}
-            onCancel={() => handleOpenModal(false)}
-            title={title || translate.datePicker.title}
-            cancelText={cancelText || translate.datePicker.cancelText}
-            confirmText={confirmText || translate.datePicker.confirmText}
-          />
+          {openDatePicker && Platform.OS === 'ios' && (
+            <Modal
+              transparent={true}
+              animationType="slide"
+              visible={openDatePicker}
+              onRequestClose={() => setOpenDatePicker(false)}
+
+            >
+              <View style={{ flex: 1, justifyContent: 'center', backgroundColor: 'rgba(0,0,0,0.5)' }}>
+                <View style={{ backgroundColor: '#fff', margin: 20 }}>
+                  <DateTimePicker
+                    {...rest}
+                    display="spinner"
+                    mode="date"
+                    value={dateValue || defaultValue}
+                    onChange={handleChangeValue}
+                    style={{ backgroundColor: 'white' }}
+                    {...(purposeOfUse === 'birth'
+                      ? { maximumDate: new Date(moment().year(), moment().month(), moment().month()) }
+                      : { minimumDate: new Date(moment().year(), moment().month(), moment().month()) })}
+                  />
+                  <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 15 }}>
+                    <Button title={cancelText || "cancel"} onPress={() => setOpenDatePicker(false)} />
+                    <Button title={confirmText || "OK"} onPress={() => setOpenDatePicker(false)} />
+                  </View>
+                </View>
+              </View>
+            </Modal>
+          )}
+
+          {openDatePicker && Platform.OS === 'android' && (
+            <DateTimePicker
+              {...rest}
+              display="spinner"
+              mode="date"
+              value={dateValue || defaultValue}
+              onChange={handleChangeValue}
+              {...(purposeOfUse === 'birth'
+                ? { maximumDate: new Date(moment().year(), moment().month(), moment().month()) }
+                : { minimumDate: new Date(moment().year(), moment().month(), moment().month()) })}
+            />
+          )}
 
           {dateValue ? (
             <TextInput>

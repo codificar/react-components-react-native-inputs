@@ -24,6 +24,7 @@ O componente DatePicker permite ao usuário selecionar uma data específica por 
 | **`cancelText`**      | `string`               | Não         | `"Cancelar"`            | Texto do botão para cancelar a seleção.                                                              |
 | **`title`**           | `string`               | Não         | `"Insira seu telefone"` | Título exibido no modal de seleção de data.                                                          |
 | **`showIcon`**        | `boolean`              | Não         | `true`                  | Exibe ou oculta o ícone do calendário.                                                               |
+| **`purposeOfUse`**    | `string`               | Não         | `birth`                 | Especifica o limite máximo e mínimo da data de acordo com objetivo passado. Se definido como `birth`, não é possível selecionar uma data maior que a atual. Se definido como `expiration`, não é possível adicionar uma data menor que a atual                                                               |
 | **`onSubmitEditing`** | `React.Dispatch<void>` | Não         | `undefined`             | Função executada ao finalizar a edição.                                                              |
 
 ## Exemplo de Uso

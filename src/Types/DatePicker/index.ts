@@ -58,7 +58,12 @@ export interface IDatePickerRef {
  * @description Date component properties
  * @interface IPropsDatePicker
  */
-export interface IPropsDatePicker extends Omit<DatePickerProps, 'theme'>{
+export interface IPropsDatePicker extends Omit<DatePickerProps, 'theme'> {
+  /**
+     * @description defines whether the date field is for birth date or expiration date
+     * @type {string}*/
+  purposeOfUse: string;
+
   /**
    * @description Language for the phone component
    * @type {string}
