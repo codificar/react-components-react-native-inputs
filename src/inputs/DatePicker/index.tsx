@@ -74,14 +74,12 @@ const DatePicker: React.ForwardRefRenderFunction<
       if (Platform.OS === 'android') {
         if (value === undefined) return handleOpenModal(false);
         setDateValue(value);
-        setOpenDatePicker(false);
         setIsFocus("");
         setError("");
         onSubmitEditing && onSubmitEditing();
       } else {
         if (event.type === 'set') {
           setDateValue(value);
-          setOpenDatePicker(false);
           setIsFocus("");
           setError("");
           onSubmitEditing && onSubmitEditing();
@@ -175,8 +173,8 @@ const DatePicker: React.ForwardRefRenderFunction<
                     onChange={handleChangeValue}
                     style={{ backgroundColor: 'white' }}
                     {...(purposeOfUse === 'birth'
-                      ? { maximumDate: new Date(moment().year(), moment().month(), moment().month()) }
-                      : { minimumDate: new Date(moment().year(), moment().month(), moment().month()) })}
+                      ? { maximumDate: new Date(moment().year(), moment().month(), 31) }
+                      : { minimumDate: new Date(moment().year(), moment().month(), 31) })}
                   />
                   <View style={{ flexDirection: 'row', justifyContent: 'flex-end', padding: 15 }}>
                     <Button title={cancelText || "cancel"} onPress={() => setOpenDatePicker(false)} />
@@ -195,8 +193,8 @@ const DatePicker: React.ForwardRefRenderFunction<
               value={dateValue || defaultValue}
               onChange={handleChangeValue}
               {...(purposeOfUse === 'birth'
-                ? { maximumDate: new Date(moment().year(), moment().month(), moment().month()) }
-                : { minimumDate: new Date(moment().year(), moment().month(), moment().month()) })}
+                ? { maximumDate: new Date(moment().year(), moment().month(), 31) }
+                : { minimumDate: new Date(moment().year(), moment().month(), 31) })}
             />
           )}
 
