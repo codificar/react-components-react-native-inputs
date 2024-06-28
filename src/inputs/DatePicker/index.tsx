@@ -73,8 +73,8 @@ const DatePicker: React.ForwardRefRenderFunction<
     const handleChangeValue = useCallback((event: any, value?: Date) => {
       if (Platform.OS === 'android') {
         if (value === undefined) return handleOpenModal(false);
-        setOpenDatePicker(!openDatePicker)
         setDateValue(value);
+        setOpenDatePicker(false);
         setIsFocus("");
         setError("");
         onSubmitEditing && onSubmitEditing();
