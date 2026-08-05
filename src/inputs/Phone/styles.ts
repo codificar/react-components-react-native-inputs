@@ -1,6 +1,6 @@
 // Modules
-import styled, { css } from "styled-components/native";
 import ModalSelector from "react-native-modal-selector-searchable";
+import styled, { css } from "styled-components/native";
 
 // Types
 import {
@@ -14,7 +14,6 @@ import {
 
 export const Container = styled.View`
   display: flex;
-  flex: 1;
   width: 100%;
   padding: 8px 0;
 `;
